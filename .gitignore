@@ -1,0 +1,10 @@
+__pycache__
+*.py[cod]
+venv/
+.venv/
+*.class
+*.o
+*.so
+*.dll
+*.exe
+.env

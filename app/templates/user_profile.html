@@ -1,0 +1,39 @@
+<!-- profile.html -->
+{% if admin.is_admin %}
+{% extends "admin.html" %}
+{% else %}
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+    <h3>Your Profile</h3>
+    <table class="transaction-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Balance</th>
+                <th>PIN</th>
+                <th>Account_No</th>
+        
+            </tr>
+        </thead>
+        <tbody>
+           
+            <tr>
+               
+                <td>{{ admin.name }}</td>
+                <td>{{ admin.email }}</td>
+                <td>{{ admin.balance }}</td>
+                <td>{{ admin.pin }}</td>
+                <td>{{ admin.account_no }}</td>
+                
+            </tr>
+           
+        </tbody>
+    </table>
+    
+{% endblock %}
+{%  endif %}

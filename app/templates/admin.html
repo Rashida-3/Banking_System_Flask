@@ -1,0 +1,61 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}User Profile{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/unik.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2><img src="{{ url_for('static', filename='images/unik.png') }}" alt="" width="150" height="50"></h2>
+            <ul id="sidebar-nav">
+                <li><a href="{{ url_for('admin.user_profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('admin.transaction') }}">Transactions</a></li>
+                <li><a href="{{ url_for('admin.credit_funds') }}">Deposit</a></li>
+                <li><a href="{{ url_for('admin.debit_funds') }}">Withdraw</a></li>
+                <li><a href="{{ url_for('admin.users_account') }}">Users List</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="topbar">
+                {% if admin.is_admin %}
+                    <h1>Admin Panel</h1>
+                    <h2>Welcome, {{ admin.name }}</h2>
+                {% else %}
+                <h2>Welcome, {{ user.name }}</h2>
+                {% endif %}
+            </div>
+            <div class="content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var sidebarNav = document.getElementById("sidebar-nav");
+            var links = sidebarNav.getElementsByTagName("a");
+            var currentUrl = window.location.href;
+            
+            for (var i = 0; i < links.length; i++) {
+                if (links[i].href === currentUrl) {
+                    links[i].classList.add("active");
+                }
+                
+                links[i].addEventListener("click", function() {
+                    for (var j = 0; j < links.length; j++) {
+                        links[j].classList.remove("active");
+                    }
+                    this.classList.add("active");
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
